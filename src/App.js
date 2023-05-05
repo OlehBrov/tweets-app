@@ -1,7 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
+import { getAllUsers } from './services/fetchAPI';
 
 function App() {
+
+  getAllUsers()
   return (
     <div className="App">
       <header className="App-header">

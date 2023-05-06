@@ -3,6 +3,13 @@ import { getAllUsers } from "../services/fetchAPI";
 import { UsersList } from "../components/usersList";
 import styled from "styled-components";
 import { Box, Button, Select, Text } from "@chakra-ui/react";
+// import { useSearchParams } from "react-router-dom";
+
+export const searchCardsParams = ({ params }) => {
+  const queryParams = params;
+  console.log("params", params);
+  return queryParams;
+};
 
 export const Homepage = () => {
   const [page, setPage] = useState(1);
@@ -14,22 +21,27 @@ export const Homepage = () => {
   const [noMoreCards, setNoMoreCards] = useState(false);
   const [followNumber, setFollowNumber] = useState(0);
   const [isFollowingNumber, setIsFollowingNumber] = useState(0);
+
+
   useEffect(() => {
-    console.log("first useEffect");
-    getAllUsers().then((data) => {
-      setTotalCards(data.length);
-      setIsFollowingNumber(data.filter((el) => el.isFollowed === true).length);
-      setFollowNumber(data.filter((el) => el.isFollowed === false).length);
+    getAllUsers().then((res) => {
+      setTotalCards(res.data.length);
+      setIsFollowingNumber(
+        res.data.filter((el) => el.isFollowed === true).length
+      );
+      setFollowNumber(res.data.filter((el) => el.isFollowed === false).length);
     });
-    getAllUsers(page, limit).then((data) => setAllUsers(data));
+    getAllUsers(page, limit).then((res) => setAllUsers(res.data));
     setPage(page + 1);
   }, []);
+
+
 
   const handleLoadMore = async () => {
     await setPage((page) => (page += 1));
 
-    getAllUsers(page, limit, filter).then((data) =>
-      setAllUsers([...allUsers, ...data])
+    getAllUsers(page, limit, filter).then((res) =>
+      setAllUsers([...allUsers, ...res.data])
     );
   };
   useEffect(() => {
@@ -40,17 +52,12 @@ export const Homepage = () => {
       return;
     }
     if (allUsers.length === totalCards) setNoMoreCards(true);
-    // console.log("noMoreCards", noMoreCards);
-    // console.log("followNumber", followNumber);
-    // console.log("isFollowingNumber", isFollowingNumber);
   }, [allUsers, followNumber, isFilering, isFollowingNumber, totalCards]);
 
   useEffect(() => {
-    console.log("useEffect on filter");
     if (filter !== null) {
-      getAllUsers(page, limit, filter).then((data) => {
-        console.log("fetch in filter useEffect");
-        setAllUsers(data);
+      getAllUsers(page, limit, filter).then((res) => {
+        setAllUsers(res.data);
       });
 
       setPage((page) => (page += 1));
@@ -59,14 +66,12 @@ export const Homepage = () => {
 
   const handleFilter = (e) => {
     if (e.target.value === "") {
-      console.log("if in filter handler");
       setPage(1);
       setFilter("");
       setIsFiltering(false);
       return;
     }
     setIsFiltering(true);
-
     setPage(1);
     setFilter(e.target.value);
   };
@@ -89,15 +94,15 @@ export const Homepage = () => {
       </Box>
       {totalCards > 0 && <UsersList props={allUsers} />}
       <Box
-        marginTop='35px'
-        marginBottom='35px'
-        marginLeft='auto'
-        marginRight='auto'
+        marginTop="35px"
+        marginBottom="35px"
+        marginLeft="auto"
+        marginRight="auto"
         disabled={noMoreCards}
         onClick={handleLoadMore}
         as="button"
         height="50px"
-        width='196px'
+        width="196px"
         lineHeight="1.2"
         transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
         // px='8px'
@@ -115,10 +120,10 @@ export const Homepage = () => {
           borderColor: "#bec3c9",
         }}
         _disabled={{
-           bg: "#dddfe2",
+          bg: "#dddfe2",
           transform: "scale(0.98)",
-          borderColor: "#bec3c9",}
-        }
+          borderColor: "#bec3c9",
+        }}
         _focus={{
           boxShadow:
             "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
@@ -126,14 +131,7 @@ export const Homepage = () => {
       >
         {noMoreCards ? "No more cards" : "Load more cards"}
       </Box>
-      {/* <Button
-        disabled={noMoreCards}
-        colorScheme="teal"
-        variant="solid"
-        onClick={handleLoadMore}
-      >
-        {noMoreCards ? "No more cards" : "Load more cards"}
-      </Button> */}
+      
     </MainContainer>
   );
 };

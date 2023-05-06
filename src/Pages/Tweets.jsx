@@ -1,19 +1,31 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useLocation, useParams, Link as RLink } from "react-router-dom";
 import { getSingleUser } from "../services/fetchAPI";
-import { Card, CardBody, ListItem, UnorderedList } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  CardBody,
+  Link,
+  ListItem,
+  UnorderedList,
+} from "@chakra-ui/react";
 import { cardStyle } from "../components/usersListItem";
 
 export const TweetsPage = () => {
   const { id } = useParams();
-
   const [userTweets, setUserTweets] = useState();
+
   useEffect(() => {
     getSingleUser(id).then((data) => setUserTweets(data));
   }, [id]);
 
   return (
     <>
+      <Box>
+        <Link as={RLink} to={"/"} sx={LinkBoxStyle}>
+          Go back
+        </Link>
+      </Box>
       {userTweets && <h2>Tweets of{userTweets.user}</h2>}
       <UnorderedList
         columns={2}
@@ -49,3 +61,25 @@ const listStyle = {
   flexWrap: "wrap",
   gap: "25px",
 };
+
+const LinkBoxStyle = {
+  width: "155px",
+  background: "linear-gradient(to right,#19ca2e ,#2b6738)",
+  backgroundColor: "#19ca2e",
+  color: "#fff",
+  fontFamily: "serif",
+  fontSize: "18px",
+  padding: "14px 15px",
+  borderRadius: "10px",
+  display: "block",
+  justifyContent: "center",
+  alignItems: "center",
+};
+// a.my-button:hover{
+//  background: linear-gradient(to right,#54d05c ,#5a7f61);
+//  background-color: #54d05c;
+// }
+// a.my-button:active{
+//  transform: scale(0.95);
+// }
+// }

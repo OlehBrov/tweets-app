@@ -1,4 +1,5 @@
 import axios from "axios";
+import { searchCardsParams } from "../Pages/Home";
 
 axios.defaults.baseURL = "https://644667f90431e885f0110f5f.mockapi.io";
 
@@ -9,9 +10,7 @@ export const getAllUsers = async (page, limit, isFollowed) => {
     url: "/tweetsusers",
     params:{page, limit, isFollowed}
   });
-
-
-  return allUsers.data;
+  return allUsers;
 };
 
 export const followersUpdate = async ({ id, ...data }) => {

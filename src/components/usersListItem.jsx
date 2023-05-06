@@ -11,13 +11,15 @@ import logo from "../images/Logo.png";
 import puzzle from "../images/puzzle.png";
 import { useEffect, useState } from "react";
 import { followersUpdate } from "../services/fetchAPI";
-
+import { Link as RLink, useLocation } from 'react-router-dom';
+ 
 export const UsersListItem = ({ props }) => {
   const [isFollowed, setIsFollowed] = useState(props.isFollowed);
   const [followers, setFollowers] = useState(props.followers);
   const [initiateUpdate, setInitiateUpdate] = useState(false);
-  console.log("props", props);
-
+  // console.log("props UsersListItem", props);
+  const location = useLocation()
+  console.log('props.tweets.length', props.tweets.length)
   useEffect(() => {
     if (initiateUpdate) {
       followersUpdate({
@@ -36,7 +38,7 @@ export const UsersListItem = ({ props }) => {
   };
 
   return (
-    <li key={props.id}>
+    <li >
       <Card sx={cardStyle}>
         <CardBody>
           <Box>
@@ -51,15 +53,16 @@ export const UsersListItem = ({ props }) => {
               <Image
                 borderRadius="full"
                 boxSize="64px"
-                src="https://i.pravatar.cc/200"
+                src={props.avatar}
+                // src="https://i.pravatar.cc/200"
                 sx={ImageStyle}
               />
             </Box>
           </Box>
           <Box sx={TextAlign}>
-            <Text sx={TextStyle} mb={"16px"}>
-              {props.tweets} TWEETS
-            </Text>
+            <RLink to={`/tweets/${props.id}`}state={{from:location}}><Text sx={TextStyle} mb={"16px"}>
+              {props.tweets.length} TWEETS
+            </Text></RLink> 
             <Text sx={TextStyle}>{followers} FOLLOWERS</Text>
             <Button
               sx={ButtonStyle}
@@ -75,7 +78,7 @@ export const UsersListItem = ({ props }) => {
   );
 };
 
-const cardStyle = {
+export const cardStyle = {
   display: "flex",
   flexDirection: "column",
   width: "380px",
@@ -141,3 +144,6 @@ const ButtonStyle = {
   ...TextStyle,
   color: "#373737",
 };
+
+
+

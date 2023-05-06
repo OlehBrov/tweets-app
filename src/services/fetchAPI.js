@@ -9,19 +9,14 @@ export const getAllUsers = async (page, limit, isFollowed) => {
     url: "/tweetsusers",
     params:{page, limit, isFollowed}
   });
-    console.log('page', page)
-  console.log('limit', limit)
-      console.log('isFollowed', isFollowed)
 
 
   return allUsers.data;
 };
 
 export const followersUpdate = async ({ id, ...data }) => {
-  console.log("followUpdate", data);
   const res = await axios.put(`/tweetsusers/${id}`, data);
  
-  console.log('res', res)
   return res
 };
 

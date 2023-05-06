@@ -19,7 +19,7 @@ export const UsersListItem = ({ props }) => {
   const [initiateUpdate, setInitiateUpdate] = useState(false);
   // console.log("props UsersListItem", props);
   const location = useLocation()
-  console.log('props.tweets.length', props.tweets.length)
+  // console.log('props.tweets.length', props.tweets.length)
   useEffect(() => {
     if (initiateUpdate) {
       followersUpdate({

@@ -3,8 +3,8 @@ import { SimpleGrid } from '@chakra-ui/react'
 import { UsersListItem } from "./usersListItem"
 
 export const UsersList = ({props}) => {
-    console.log('UsersList', props)
-    return <SimpleGrid columns={2} spacing={10} listStyleType={'none'}>
+    // console.log('UsersList', props)
+    return <SimpleGrid columns={2} spacing={10} listStyleType={'none'} sx={gridStyle}>
         {props.map(el => <UsersListItem key={el.id} props={el} />)}
     </SimpleGrid>
 }
@@ -15,3 +15,6 @@ export const UsersList = ({props}) => {
 
 // `
 
+const gridStyle = {
+justifyItems: 'center'
+}

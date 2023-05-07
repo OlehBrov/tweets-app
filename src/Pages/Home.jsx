@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { getAllUsers } from "../services/fetchAPI";
 import { UsersList } from "../components/usersList";
 import styled from "styled-components";
-import { Box, Button, Select, Text } from "@chakra-ui/react";
+import { Box, Select, Text } from "@chakra-ui/react";
 // import { useSearchParams } from "react-router-dom";
+import {filterStyle, noMoreCardsBtnStyle} from './HomeStyles'
 
 export const searchCardsParams = ({ params }) => {
   const queryParams = params;
@@ -33,6 +34,7 @@ export const Homepage = () => {
     });
     getAllUsers(page, limit).then((res) => setAllUsers(res.data));
     setPage(page + 1);
+    setLimit(4)
   }, []);
 
 
@@ -94,25 +96,13 @@ export const Homepage = () => {
       </Box>
       {totalCards > 0 && <UsersList props={allUsers} />}
       <Box
-        marginTop="35px"
-        marginBottom="35px"
-        marginLeft="auto"
-        marginRight="auto"
+        
+        sx={noMoreCardsBtnStyle}
+       
         disabled={noMoreCards}
         onClick={handleLoadMore}
         as="button"
-        height="50px"
-        width="196px"
-        lineHeight="1.2"
-        transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
-        // px='8px'
-        borderRadius="18px"
-        fontSize="22px"
-        fontWeight="600"
-        bg="#5CD3A8"
-        boxShadow="0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25)"
-        // borderColor='#ccd0d5'
-        color="#373737"
+        
         _hover={{ bg: "#ebedf0" }}
         _active={{
           bg: "#dddfe2",
@@ -143,9 +133,3 @@ const MainContainer = styled.div`
   flex-direction: column;
 `;
 
-const filterStyle = {
-  marginBottom: "30px",
-  width: "300px",
-  marginLeft: "auto",
-  marginRight: "auto",
-};

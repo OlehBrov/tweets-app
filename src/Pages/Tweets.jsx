@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { useLocation, useParams, Link as RLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link as RLink } from "react-router-dom";
 import { getSingleUser } from "../services/fetchAPI";
 import {
   Box,
@@ -7,9 +7,10 @@ import {
   CardBody,
   Link,
   ListItem,
+  Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import { cardStyle } from "../components/usersListItem";
+import {tweetCardStyle, listStyle, LinkBoxStyle} from './TweetsStyles'
 
 export const TweetsPage = () => {
   const { id } = useParams();
@@ -21,12 +22,25 @@ export const TweetsPage = () => {
 
   return (
     <>
-      <Box>
-        <Link as={RLink} to={"/"} sx={LinkBoxStyle}>
+      <Box sx={{ marginTop: "25px", marginLeft: "25px" }}>
+        <Link
+          as={RLink}
+          to={"/"}
+          sx={LinkBoxStyle}
+          _focus={{
+            boxShadow:
+              "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
+          }}
+        >
           Go back
         </Link>
       </Box>
-      {userTweets && <h2>Tweets of{userTweets.user}</h2>}
+
+      {userTweets && (
+        <Text align={"center"} fontSize="5xl">
+          Tweets of {userTweets.user}
+        </Text>
+      )}
       <UnorderedList
         columns={2}
         spacing={10}
@@ -48,38 +62,3 @@ export const TweetsPage = () => {
   );
 };
 
-const tweetCardStyle = {
-  ...cardStyle,
-  flexGrow: "1",
-  height: "100%",
-  background:
-    "linear-gradient(114.99deg, #dbd9df -0.99%, #afafb1 54.28%, #bab8c1 78.99%)",
-};
-
-const listStyle = {
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "25px",
-};
-
-const LinkBoxStyle = {
-  width: "155px",
-  background: "linear-gradient(to right,#19ca2e ,#2b6738)",
-  backgroundColor: "#19ca2e",
-  color: "#fff",
-  fontFamily: "serif",
-  fontSize: "18px",
-  padding: "14px 15px",
-  borderRadius: "10px",
-  display: "block",
-  justifyContent: "center",
-  alignItems: "center",
-};
-// a.my-button:hover{
-//  background: linear-gradient(to right,#54d05c ,#5a7f61);
-//  background-color: #54d05c;
-// }
-// a.my-button:active{
-//  transform: scale(0.95);
-// }
-// }

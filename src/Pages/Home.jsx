@@ -3,7 +3,6 @@ import { getAllUsers } from "../services/fetchAPI";
 import { UsersList } from "../components/usersList";
 import styled from "styled-components";
 import { Box, Select, Text } from "@chakra-ui/react";
-// import { useSearchParams } from "react-router-dom";
 import {filterStyle, noMoreCardsBtnStyle} from './HomeStyles'
 
 export const searchCardsParams = ({ params }) => {

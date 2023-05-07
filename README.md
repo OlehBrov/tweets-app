@@ -1,6 +1,6 @@
 # Getting in our Tweets App.
 
-This application allows you to check your followings, follow new wrighters or unsubscribe of certain writer.
+This application allows you to check your followings, follow new writers or unsubscribe of certain writer.
 
 Here you can read post of all existing users.
 

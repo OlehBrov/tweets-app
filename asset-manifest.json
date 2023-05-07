@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/tweets-app/static/css/main.e6c13ad2.css",
+    "main.js": "/tweets-app/static/js/main.7000774f.js",
+    "static/media/puzzle.png": "/tweets-app/static/media/puzzle.86562350dcaa714a1442.png",
+    "index.html": "/tweets-app/index.html",
+    "main.e6c13ad2.css.map": "/tweets-app/static/css/main.e6c13ad2.css.map",
+    "main.7000774f.js.map": "/tweets-app/static/js/main.7000774f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.7000774f.js"
+  ]
+}

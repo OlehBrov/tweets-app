@@ -1,4 +1,4 @@
-# Getting in our Tweets App.
+# Greeting in our Tweets App.
 
 This application allows you to check your followings, follow new writers or unsubscribe of certain writer.
 

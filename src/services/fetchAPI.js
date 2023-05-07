@@ -1,5 +1,4 @@
 import axios from "axios";
-import { searchCardsParams } from "../Pages/Home";
 
 axios.defaults.baseURL = "https://644667f90431e885f0110f5f.mockapi.io";
 
